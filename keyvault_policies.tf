@@ -4,6 +4,7 @@
 resource "azurerm_key_vault_access_policy" "account_admin_policy" {
   key_vault_id = azurerm_key_vault.init_keyvault.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = data.azurerm_client_config.current.object_id
 
   certificate_permissions = [
     "backup",
@@ -72,39 +73,3 @@ resource "azurerm_key_vault_access_policy" "account_admin_policy" {
   ]
 }
 
-resource "azurerm_key_vault_access_policy" "devops_policy" {
-  key_vault_id = azurerm_key_vault.fisdev_keyvault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
- 
-
-  certificate_permissions = []
-  key_permissions         = []
-
-  secret_permissions = [
-    "backup",
-    "delete",
-    "get",
-    "list",
-    "purge",
-    "recover",
-    "restore",
-    "set"
-  ]
-
-  storage_permissions = [
-    "backup",
-    "delete",
-    "deletesas",
-    "get",
-    "getsas",
-    "list",
-    "listsas",
-    "purge",
-    "recover",
-    "regeneratekey",
-    "restore",
-    "set",
-    "setsas",
-    "update"
-  ]
-}
